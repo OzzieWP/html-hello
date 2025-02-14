@@ -1,39 +1,314 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Post Instagram</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div class="feed">
-            <div class="post">
-                <div class="post-header">
-                    <img src="https://play-lh.googleusercontent.com/2zorpA9peRFcwZM5SLSAx80gLCA3YrknRXQwPW-Hz2AJyBcvBJiO9vuP6DvlX3FRZXMv=w526-h296-rw" alt="Foto de perfil" class="avatar">
-                    <div class="user-info">
-                        <p class="username">OzzieWP</p>
-                        <p class="ubicacion">Tucacas, Venezuela</p>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Feed with Bootstrap</title>
+    <!-- Bootstrap Styling link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Fontawesome link (For the icons) -->
+    <script src="https://kit.fontawesome.com/072e5df971.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <style>
+        .nav-pill .nav-link{
+            color: grey;
+        }
+        .nav-pill .nav-link.active{
+            color: blue;
+        }
+    </style>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-light py-3">
+        <div class="container-fluid">
+            <div class="d-flex w-100 justify-content-between">
+                <div>
+                    <i class="fa-brands fa-instagram fa-xl"></i>
+                    <h5 class="d-inline-block fs-5">Instagram</h5>
+                </div>
+                <div class="d-flex align-right justify-content-end">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-success me-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Crear una nueva publicación
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-gear"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Accesibilidad</a></li>
+                            <li><a class="dropdown-item" href="#">Datos y privacidad</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="#">Cerrar sesión</a></li>
+                        </ul>
                     </div>
                 </div>
-
-            </div>
-        
-            <div class="post-image">
-                <img src="https://images.hive.blog/DQmfHLNrduWjd1WzSogGt3thHZYUTfyBTiQNbND36AsakdA/Screenshot_20200811-162218_Gallery.jpg" alt="Post image">
-            </div>
-            <div class="post-footer">
-            <div class="actions">
-                <button id="like-button">❤</button>
-                <button id="Comment-button">💬</button>
-                <button id="share-button">✈</button>
-                    <p id="like-count">9.9M Likes</p>
-            </div>
-                <p class="caption"><strong>OzzieWP</strong> El camino a la felicidad.❤</p>
-            </div>
-        
             </div>
         </div>
-        <script src="script.js"></script>
-    </body>
+    </nav>
+
+    <!-- Modal Body -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crear una publicación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Descripción:</h6>
+                    <textarea class="form-control" placeholder="Escribe una descripción de tu publicación"
+                        id="floatingTextarea2"></textarea>
+                    <div class="row p-2">
+                        <button class="col-1 border rounded p-1 m-1 btn-light">
+                            <i class="fa-solid fa-camera"></i>
+                        </button>
+                        <button class="col-1 border rounded p-1 m-1 btn-light">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success">Publicar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toggle Grid -->
+    <div class="container-fluid p-2">
+        <ul class="nav nav-pill justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                    role="tab" aria-controls="home" aria-selected="true"><i
+                        class="fa-solid fa-table-cells"></i></a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                    role="tab" aria-controls="profile" aria-selected="false"><i class="fa-solid fa-square"></i></a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <!-- 3 photos per row grid -->
+            <div class="tab-pane fade show active overflow-hidden" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row">
+                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://images.unsplash.com/photo-1538964173425-93884d739596?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt=""></div>
+                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://plus.unsplash.com/premium_photo-1733317222040-b58a1c62f049?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100" alt=""></div>
+                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://epaleccs.info/gestor/archivos/imagenes/318/fileblob230417093826.jpg" class="img-fluid w-100" alt=""></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://images.hive.blog/DQmYNLrgpSad93yANAXNbVPoD8756X2Lj6JV8nkupRGCYcY/20230730_183906.jpg" class="img-fluid w-100" alt=""></div>
+                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://upload.wikimedia.org/wikipedia/commons/3/34/Los_testigos_venezuela.jpg" class="img-fluid w-100" alt=""></div>
+                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://i.pinimg.com/736x/fd/d8/51/fdd85137b469037283423ced4c29f24d.jpg" class="img-fluid w-100" alt=""></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://www.orgbluewater.com/wp-content/uploads/2021/10/DJI_0168.jpg.webp" class="img-fluid w-100" alt=""></div>
+                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://expatstraveltogether.com/wp-content/uploads/2023/09/Laguna-de-Canaima-scaled.jpg" class="img-fluid w-100" alt=""></div>
+                    <div class="col-4 p-1"><img style="height: 30vw; object-fit: cover;" src="https://www.geodyssey.co.uk/venezuela/_img/ss/guide/gran-sabana/image-02.jpg" class="img-fluid w-100" alt=""></div>
+                </div>
+            </div>
+            <!-- 1 photo per row grid -->
+            <div class="tab-pane fade overflow-hidden" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">🏝️Paraíso en la Tierra: Playas de Venezuela🌊✨</div>
+                            <small class="align-bottom">08/26</small>
+                        </div>
+                        <img style="object-fit: cover;" src="https://images.unsplash.com/photo-1538964173425-93884d739596?q=80&w=2243&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100 col-12" alt=""/>
+                        <div class="p-2">
+                            <strong>1.1M Likes</strong>
+                            <p> Arena blanca, aguas cristalinas y un sol que abraza con
+                                calidez… Las playas de Venezuela son un verdadero tesoro
+                                natural. Desde Los Roques hasta Morrocoy, cada rincón
+                                costero nos regala paisajes de ensueño y momentos
+                                inolvidables. 🌅💙 ¿Cuál es tu playa favorita?
+                                #PlayasDeVenezuela #ParaísoTropical #MarCaribe</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">Auyantepuy: La morada de los dioses⛰️</div>
+                            <small>04/09</small>
+                        </div>
+                        <img style="object-fit: cover;" src="https://plus.unsplash.com/premium_photo-1733317222040-b58a1c62f049?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid w-100 col-12" alt=""/>
+                        <div class="p-2">
+                            <strong>9.8M Likes</strong>
+                            <p>⛰️🔥 Auyantepuy: la voz de la tierra, el alma de Venezuela.
+                                🌿✨ No es solo roca y selva, es historia escrita en piedra,
+                                es el susurro del viento que nos recuerda quiénes somos.
+                                Desde sus alturas nace el Salto Ángel, el río se convierte
+                                en leyenda y el tiempo se detiene ante su grandeza. Porque
+                                Venezuela no solo tiene maravillas… es una maravilla en sí
+                                misma. 🇻🇪💛💙❤️ #Auyantepuy #OrgulloVenezolano
+                                #DondeNacenLasLeyendas #VenezuelaEterna</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">La majestuosidad del Waraira Repano🌿</div>
+                            <small>06/10</small>
+                        </div>
+                        <img style="object-fit: cover;" src="https://epaleccs.info/gestor/archivos/imagenes/318/fileblob230417093826.jpg" class="img-fluid w-100 col-12" alt=""/>
+                        <div class="p-2">
+                            <strong>984k Likes</strong>
+                            <p>Testigo silencioso de la historia y guardián de Caracas, el
+                                Waraira Repano se alza imponente, regalándonos un paisaje
+                                que nunca deja de asombrar. Su verdor, su brisa y su
+                                inmensidad nos invitan a contemplarlo y a valorar la belleza
+                                natural que nos rodea. 🍃⛰️💚 #WarairaRepano #BellezaNatural
+                                #Caracas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">Los Médanos de Coro – 📸 "Dunas doradas en el corazón de
+                                Venezuela"</div>
+                            <small class="align-bottom">08/26</small>
+                        </div>
+                        <img style="object-fit: cover;" src="https://images.hive.blog/DQmYNLrgpSad93yANAXNbVPoD8756X2Lj6JV8nkupRGCYcY/20230730_183906.jpg" class="img-fluid w-100 col-12" alt=""/>
+                        <div class="p-2">
+                            <strong>347k Likes</strong>
+                            <p>🌵 Un desierto en pleno Caribe… Los Médanos de Coro nos
+                                transportan a un paisaje único, donde el viento esculpe
+                                dunas en constante cambio. Caminar sobre su arena y ver el
+                                atardecer aquí es una experiencia mágica. ✨🏜️
+                                #MédanosDeCoro #DesiertoVenezolano #MaravillasDeVenezuela</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">El Archipiélago de Los Testigos – 📸 "Un paraíso escondido
+                                en el Caribe"</div>
+                            <small class="align-bottom">08/26</small>
+                        </div>
+                        <img style="object-fit: cover;" src="https://upload.wikimedia.org/wikipedia/commons/3/34/Los_testigos_venezuela.jpg" class="img-fluid w-100 col-12" alt=""/>
+                        <div class="p-2">
+                            <strong>244k Likes</strong>
+                            <p>🌊✨ Aguas turquesas, arena dorada y cero estrés. 💆‍♂️🏝️ Si
+                                creías que ya habías visto todo en el Caribe, el
+                                Archipiélago de Los Testigos viene a demostrarte lo
+                                contrario. Un paraíso escondido donde el tiempo se detiene y
+                                la naturaleza manda. ¿Lo mejor? Casi nadie lo conoce. 🤫🔥
+                                ¿Te animas a descubrirlo? 🚤☀️ #SecretSpot #LosTestigos
+                                #CaribeVenezolano #BeachVibes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">El Teleférico de Mérida (Mukumbarí) – 📸 "Entre nubes y
+                                montañas"</div>
+                            <small class="align-bottom">08/26</small>
+                        </div>
+                        <img style="object-fit: cover;" src="https://i.pinimg.com/736x/fd/d8/51/fdd85137b469037283423ced4c29f24d.jpg" class="img-fluid w-100 col-12" alt=""/>
+                        <div class="p-2">
+                            <strong>1.5M Likes</strong>
+                            <p> 🚠❄️ De la ciudad al cielo en minutos. ⛰️☁️ Subir en el
+                                teleférico más alto y largo del mundo es como viajar a otra
+                                dimensión: el frío pega distinto, la vista es de otro nivel
+                                y la experiencia es simplemente mágica. 🔥✨ ¿Listo para
+                                tocar las nubes en Mérida? 🌬️🏔️ #Mukumbarí
+                                #VenezuelaDesdeLasAlturas #AndesVenezolanos #SkyHigh</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">Los Roques – 📸 "El Caribe venezolano en su máxima
+                                expresión"</div>
+                            <small class="align-bottom">08/26</small>
+                        </div>
+                        <img style="object-fit: cover;" src="https://www.orgbluewater.com/wp-content/uploads/2021/10/DJI_0168.jpg.webp" class="img-fluid w-100 col-12" alt=""/>
+                        <div class="p-2">
+                            <strong>6.8M Likes</strong>
+                            <p>🏝️🌊 Los Roques: donde el cielo besa el mar y el tiempo se
+                                detiene. ✨🐚 Un paraíso tan irreal que parece sacado de un
+                                sueño. Aguas turquesas infinitas, arena blanca como el polvo
+                                de estrellas y la paz absoluta del Caribe venezolano. 🌅💙
+                                ¿Quién más sueña con perderse aquí? 🚤🔥 #LosRoques
+                                #CaribeDeOtroNivel #VenezuelaParadisiaca #LostInParadise</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">La Laguna de Canaima – 📸 "Donde la selva y el agua se
+                                encuentran"</div>
+                            <small class="align-bottom">08/26</small>
+                        </div>
+                        <img style="object-fit: cover;" src="https://expatstraveltogether.com/wp-content/uploads/2023/09/Laguna-de-Canaima-scaled.jpg" class="img-fluid w-100 col-12" alt=""/>
+                        <div class="p-2">
+                            <strong>8M Likes</strong>
+                            <p class="">🌊🔥 Laguna de Canaima: donde el agua corre como sangre de
+                                la tierra. ⛰️🌿 No es solo un reflejo del cielo, es el alma
+                                de la Gran Sabana, teñida de rojo por los minerales de la
+                                selva, como si la misma naturaleza hubiera dejado su firma.
+                                Rodeada de tepuyes milenarios y cascadas que rugen como
+                                dioses antiguos, este es un lugar donde el tiempo se
+                                arrodilla y la inmensidad cobra vida. Aquí, el agua no solo
+                                fluye… cuenta la historia de un mundo indomable. ⚡🌪️
+                                #CanaimaEterna #DondeLaTierraHabla #VenezuelaMítica
+                                #ElCorazónDeLaSabana</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-6 mx-auto border rounded p-0">
+                        <div class="d-flex p-2">
+                            <div class="w-100 fs-4">La Gran Sabana – 📸 "Donde la tierra es infinita y el cielo
+                                no tiene límites"</div>
+                            <small class="align-bottom">08/26</small>
+                        </div>
+                        <img style="object-fit: cover;" src="https://www.geodyssey.co.uk/venezuela/_img/ss/guide/gran-sabana/image-02.jpg" class="img-fluid w-100 col-12" alt=""/>
+                        <div class="p-2">
+                            <strong>9.2M Likes</strong>
+                            <p>⛰️🔥 La Gran Sabana: un reino de infinitas dimensiones,
+                                donde los dioses descansan y la tierra respira en silencio.
+                                🌿⚡ Cada tepuy es un coloso milenario, cada río un susurro
+                                ancestral, y cada rincón una historia que solo el viento
+                                sabe contar. Aquí, la vastedad de la naturaleza es tan
+                                imponente que la realidad se vuelve un eco lejano. La Gran
+                                Sabana no es solo un lugar… es el alma de Venezuela, un
+                                territorio tan eterno como el universo mismo. 🌎✨ ¿Tienes
+                                el coraje de caminar entre sus gigantes? 🚀🔥 #LaGranSabana
+                                #ReinoDeLosTepuyes #VenezuelaEterna #LeyendasQueViven</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap Functionalities link  -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
